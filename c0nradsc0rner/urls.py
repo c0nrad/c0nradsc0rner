@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from django.views.generic.simple import redirect_to
+#from django.views.generic import TemplateView
 from blog.models import Blog
 
 from blog import views
@@ -11,7 +11,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
     (r'^$', 'blog.views.index'),
-    url(r'^index.html$', redirect_to, {'url': '/'}),
+#    url(r'^index.html$', redirect_to, {'url': '/'}),
     url(r'^blog/view/(?P<slug>[^\.]+).html', 
         views.view_post, 
         name='view_blog_post'),
