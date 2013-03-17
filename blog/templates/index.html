@@ -2,26 +2,45 @@
 {% block title %} c0nrad's c0rner{% endblock %}
 
 {% block content %}
-    <h2>Categories</h2>
-    {% if categories %}
-        <ul>
-        {% for category in categories %}
-            <li><a href="{{ category.get_absolute_url }}">{{ category.title }}</a></li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>There are no posts.</p>
-    {% endif %}
 
-    <h2>Posts</h2>
-    {% if posts %}
-        <ul>
-        {% for post in posts %}
-            <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>There are no posts.</p>
-    {% endif %}
+<div class="container-fluid">    
 
-{% endblock %}
+  <div class="row-fluid">
+    <div class="span9">
+      {% if posts %}
+      {% for post in posts %}
+      <div class="hero-unit">
+        <h2> <a href="{{post.get_absolute_url }}"> {{post.title}} </a> </h2>
+
+        {{ post.body|safe }}
+      </div>
+      {% endfor %}
+
+      {% else %}
+      <p>There are no posts.</p>
+      {% endif %}
+
+    </div>
+
+    <div class="span3">
+
+      <div class="hero-unit">
+        <h2>Categories</h2>
+        {% if categories %}
+        <ul>
+          {% for category in categories %}
+          <li><a href="{{ category.get_absolute_url }}">{{ category.title }}</a></li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>There are no posts.</p>
+        {% endif %}
+      </div>
+      <div class="hero-unit">
+        <h2> Archives</h2>
+        <a> March 2012 </a>
+      </div>
+
+    </div>                
+</div>
+    {% endblock %}
