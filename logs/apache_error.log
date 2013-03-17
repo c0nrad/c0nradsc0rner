@@ -1,0 +1,4 @@
+[Sun Mar 17 18:32:17 2013] [error] [client 141.219.221.154] mod_wsgi (pid=21709): Exception occurred processing WSGI script '/home/djangotest/c0nradsc0rner/apache/django.wsgi'., referer: http://ec2-50-112-212-105.us-west-2.compute.amazonaws.com/
+[Sun Mar 17 18:32:17 2013] [error] [client 141.219.221.154] IOError: failed to write data, referer: http://ec2-50-112-212-105.us-west-2.compute.amazonaws.com/
+[Sun Mar 17 18:32:19 2013] [error] [client 141.219.221.154] mod_wsgi (pid=21709): Exception occurred processing WSGI script '/home/djangotest/c0nradsc0rner/apache/django.wsgi'., referer: http://ec2-50-112-212-105.us-west-2.compute.amazonaws.com/
+[Sun Mar 17 18:32:19 2013] [error] [client 141.219.221.154] IOError: failed to write data, referer: http://ec2-50-112-212-105.us-west-2.compute.amazonaws.com/
