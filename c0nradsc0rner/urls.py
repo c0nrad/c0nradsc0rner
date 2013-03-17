@@ -18,7 +18,7 @@ urlpatterns = patterns('',
     url(r'^blog/category/(?P<slug>[^\.]+).html', views.view_category,  name='view_blog_category'),
     url(r'^aboutme.html$', views.aboutme, name="view_blog_aboutme"),
         
-                       # Examples:
+    # Examples:
     # url(r'^$', 'c0nradsc0rner.views.home', name='home'),
     # url(r'^c0nradsc0rner/', include('c0nradsc0rner.foo.urls')),
 
