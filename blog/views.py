@@ -20,3 +20,6 @@ def view_category(request, slug):
         'category': category,
         'posts': Blog.objects.filter(category=category)[:5]
     })
+
+def aboutme(request):
+    return render_to_response('aboutme.html', {})

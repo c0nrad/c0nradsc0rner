@@ -1,4 +1,7 @@
-<html>
+
+
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <title>{% block head_title %}Welcome to my blog{% endblock %}</title>
 
@@ -32,10 +35,10 @@
 			  <span class="icon-bar"></span>
 			  <span class="icon-bar"></span>
 			</a>
-			<a class="brand" href="">c0nrad's corner</a>
+			<a class="brand" href="/">c0nrad's corner</a>
 			<div class="nav-collapse">
 			  <ul class="nav">
-				<li class="active"><a href="index.html">Home</a></li>
+				<li class="active"><a href="/">Home</a></li>
 				<li class="dropdown" id="fat-menu">
 				  <a class="dropdown-toggle" data-toggle="dropdown" href="#fat-menu">
 					Projects
@@ -58,11 +61,7 @@
 		  </div>
 		</div>
 	  </div>
-
-
-        <h1>{% block title %}Welcome to my block{% endblock %}</h1>
         {% block content %}
-
         {% endblock %}
     </body>
 </html>
