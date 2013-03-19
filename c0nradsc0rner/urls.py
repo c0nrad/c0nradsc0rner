@@ -1,13 +1,14 @@
 from django.conf.urls import patterns, include, url
 #from django.views.generic import TemplateView
 from blog.models import Blog
+from django.conf import settings
 
 from blog import views
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
-
+    
 urlpatterns = patterns('',
 
     (r'^$', 'blog.views.index'),
@@ -17,7 +18,7 @@ urlpatterns = patterns('',
         name='view_blog_post'),
     url(r'^blog/category/(?P<slug>[^\.]+).html', views.view_category,  name='view_blog_category'),
     url(r'^aboutme.html$', views.aboutme, name="view_blog_aboutme"),
-        
+
     # Examples:
     # url(r'^$', 'c0nradsc0rner.views.home', name='home'),
     # url(r'^c0nradsc0rner/', include('c0nradsc0rner.foo.urls')),
@@ -28,3 +29,10 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 )
+
+
+if settings.DEBUG:
+    # static files (images, css, javascript, etc.)
+    urlpatterns += patterns('',
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT}))

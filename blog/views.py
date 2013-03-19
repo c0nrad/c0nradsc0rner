@@ -6,7 +6,7 @@ from blog.models import Blog, Category
 def index(request):
     return render_to_response('index.html', {
         'categories': Category.objects.all(),
-        'posts': Blog.objects.all()[:5]
+        'posts': Blog.objects.order_by('-posted')[:5]
     })
 
 def view_post(request, slug):
@@ -22,4 +22,4 @@ def view_category(request, slug):
     })
 
 def aboutme(request):
-    return render_to_response('aboutme.html', {})
+    return render_to_response('aboutme.html', { })

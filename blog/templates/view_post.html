@@ -3,5 +3,13 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
-{{ post.body|safe }}
+
+<div class="container-fluid">    
+  <div class="row-fluid">
+    <div class="hero-unit">
+      <h2> {{post.category}}: <a href="{{post.get_absolute_url }}"> {{post.title}} </a> </h2>
+      {{ post.body|safe }}
+    </div>
+  </div>
+</div>
 {% endblock %}
