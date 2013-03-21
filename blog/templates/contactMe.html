@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %} Contact me! {% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="hero-unit">
+
+    <form method="post" action="contactMe.html"> {% csrf_token %}
+
+      <fieldset>
+    <legend>Contact Me</legend>
+    
+    Please, if you have anything you'd like to say to me, use the form below. There is no need to include your name / email if you don't want to. I'd just really like to hear you what have to say! Thanks!
+    <br /> <br />
+
+    <label id="id_name" >Name (optional) </label>
+    <input type="text" name="name" placeholder="name">
+
+    <label id="id_email">Email (optional) </label>
+    <input type="text" name="email" placeholder="email">
+
+    <label id="id_message">Contents: </label>
+    <textarea class="span11" rows="8" name="message"></textarea>
+
+   
+    <button type="submit" class="btn">Submit</button>
+    </fieldset>
+    </form>
+    
+  </div>
+</div>
+{% endblock %}
