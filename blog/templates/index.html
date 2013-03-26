@@ -34,7 +34,7 @@
     
     <h2>Categories</h2>
          <div class="accordion" id="accordion2">
-           {% for categoryName, blogs in categories.items %}
+           {% for categoryName, blogs in categories %}
           {% if blogs %}
 
               <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{forloop.counter}}">
