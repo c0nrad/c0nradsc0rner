@@ -8,7 +8,8 @@
 
   <div class="row-fluid">
 
-    <div class="span10">
+    <!-- MAIN BAR -->
+    <div class="span9">
       {% if posts %}
       {% for post in posts %}
       <div class="hero-unit">
@@ -22,23 +23,37 @@
       {% else %}
       <p>There are no posts.</p>
       {% endif %}
-
     </div>
 
-    <div class="span2">
 
+
+    <!-- SIDE BAR -->
+    <div class="span3">
       <div class="hero-unit">
-        <h2>Categories</h2>
-        {% if categories %}
-        <ul>
-          {% for category in categories %}
-          <li><a href="{{ category.get_absolute_url }}">{{ category.title }}</a></li>
+
+    
+    <h2>Categories</h2>
+         <div class="accordion" id="accordion2">
+           {% for categoryName, blogs in categories.items %}
+          {% if blogs %}
+
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{forloop.counter}}">
+                {{categoryName}}
+              </a>
+
+            <div id="collapse{{forloop.counter}}" class="accordion-body collapse">
+              <div class="accordion-inner">
+                {% for post in blogs %}
+                <small> <a href="{{post.get_absolute_url }}"> {{post.title}} </a> </small> <br />
+                {% endfor %}
+              </div>
+            </div>
+
+          {% endif %}
           {% endfor %}
-        </ul>
-        {% else %}
-        <p>There are no posts.</p>
-        {% endif %}
+         </div>
       </div>
+
       <div class="hero-unit">
         <h2> Archives</h2>
         <a> March 2012 </a>
@@ -46,5 +61,7 @@
 
     </div>                
 
-</div>
-    {% endblock %}
+  </div>
+  {% endblock %}
+
+

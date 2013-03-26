@@ -5,9 +5,20 @@ from blog.models import Blog, Category
 from django.core.mail import send_mail
 from django.template import RequestContext
 
+def categoriesWithPosts():
+    categories = dict()
+    posts= Blog.objects.all()
+    for post in posts:
+        if str(post.category.title) in categories:
+            categories[str(post.category.title)].append(post)
+        else:
+            categories[str(post.category.title)] = [post]
+
+    return categories
+
 def index(request):
     return render_to_response('index.html', {
-        'categories': Category.objects.all(),
+        'categories': categoriesWithPosts(),
         'posts': Blog.objects.order_by('-posted')[:5]
     })
 
@@ -43,3 +54,4 @@ def contactMe(request):
         return render_to_response('contactMe.html', context_instance=RequestContext(request))
     else:
         return render_to_response('contactMe.html', {})
+
