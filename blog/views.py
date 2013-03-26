@@ -13,12 +13,11 @@ def categoriesWithPosts():
             categories[str(post.category.title)].append(post)
         else:
             categories[str(post.category.title)] = [post]
-
     return categories
 
 def index(request):
     return render_to_response('index.html', {
-        'categories': categoriesWithPosts(),
+        'categories': dict(categoriesWithPosts()),
         'posts': Blog.objects.order_by('-posted')[:5]
     })
 
