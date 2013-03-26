@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 {% block title %} c0nrad's c0rner{% endblock %}
 
@@ -34,7 +35,7 @@
     
     <h2>Categories</h2>
          <div class="accordion" id="accordion2">
-           {% for categoryName, blogs in categories %}
+           {% for categoryName, blogs in categories.items %}
           {% if blogs %}
 
               <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{forloop.counter}}">
