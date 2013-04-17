@@ -26,33 +26,45 @@
       {% endif %}
     </div>
 
-
-
     <!-- SIDE BAR -->
     <div class="span3">
-      <div class="hero-unit">
 
-    
-    <h2>Categories</h2>
-         <div class="accordion" id="accordion2">
-           {% for categoryName, blogs in categories.items %}
+      <div class="hero-unit">
+        <script type="text/javascript">
+          <!--
+              google_ad_client = "ca-pub-6591355363097538";
+              /* square */
+              google_ad_slot = "1779202801";
+              google_ad_width = 250;
+              google_ad_height = 250;
+              //-->
+        </script>
+        <script type="text/javascript"
+                src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+      </div>
+
+      <div class="hero-unit">
+        <h2>Categories</h2>
+        <div class="accordion" id="accordion2">
+          {% for categoryName, blogs in categories.items %}
           {% if blogs %}
 
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{forloop.counter}}">
-                {{categoryName}}
-              </a>
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{forloop.counter}}">
+            {{categoryName}}
+          </a>
 
-            <div id="collapse{{forloop.counter}}" class="accordion-body collapse">
-              <div class="accordion-inner">
-                {% for post in blogs %}
-                <small> <a href="{{post.get_absolute_url }}"> {{post.title}} </a> </small> <br />
-                {% endfor %}
-              </div>
+          <div id="collapse{{forloop.counter}}" class="accordion-body collapse">
+            <div class="accordion-inner">
+              {% for post in blogs %}
+              <small> <a href="{{post.get_absolute_url }}"> {{post.title}} </a> </small> <br />
+              {% endfor %}
             </div>
+          </div>
 
           {% endif %}
           {% endfor %}
-         </div>
+        </div>
       </div>
 
       <div class="hero-unit">
