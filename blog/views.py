@@ -54,3 +54,16 @@ def contactMe(request):
     else:
         return render_to_response('contactMe.html', {})
 
+def postByYearsByMonth():
+    out = []
+    posts = Blog.objects.order_by('posted')
+    curYear = 0
+    curMonth = 0
+    for post in posts:
+        if post.year != curYear:
+            curYear = post.year
+        if post.month != curMonth:
+            curMonth = post.month
+
+        
+    

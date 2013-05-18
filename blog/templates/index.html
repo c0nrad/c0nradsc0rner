@@ -4,6 +4,12 @@
 
 {% block content %}
 
+<style type="text/css">
+  div.shiftDown {
+    margin-top:3px;  
+  }
+</style>
+
 
 <div class="container-fluid">    
 
@@ -14,10 +20,14 @@
       {% if posts %}
       {% for post in posts %}
       <div class="hero-unit">
-        <h2> {{post.category}}: <a href="{{post.get_absolute_url }}"> {{post.title}} </a> </h2>
+        <h2 style="display:inline"> {{post.category}}: <a href="{{post.get_absolute_url }}"> {{post.title}} {% include "googlePlusOne.html" with url=post.get_absolute_url %} </a> </h2>
+        <small> <div class="date" style="align:right; float:right; display:inline; margin-top:7px;"> {{ post.posted }} </div> </small>
+        <br /> <br />
         {{ post.body|safe }}
 
-        <span class="side"> <small> Questions or comments on this post? Please, <a href="contactMe.html"> Contact Me</a>. I'd love to hear from you.</small> </span>
+        <span class="side"> <small> Questions or comments on this post? Please, <a href="contactMe.html"> Contact Me</a>. I'd love to hear from you.</small> 
+      </span>
+
       </div>
       {% endfor %}
 
@@ -75,6 +85,7 @@
     </div>                
 
   </div>
+
   {% endblock %}
 
 
