@@ -3,12 +3,14 @@ from django.conf import global_settings
 import socket
 import os
 
-if socket.gethostname() == 'c0nradsc0rner.com':
-    DEBUG= False
-    BASE_DIR = "/"
+if socket.gethostname() == 'ip-10-253-68-236':
+    DEBUG= True
+    BASE_DIR = "/home/djangotest/c0nradsc0rner/"
+    MEDIA_ROOT = '/home/djangotest/c0nradsc0rner/media/'
 else:
     DEBUG = True
     BASE_DIR = "/root/Projects/c0nradsc0rner/"
+    MEDIA_ROOT = '/root/Projects/c0nradsc0rner/media/'
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -38,13 +40,13 @@ EMAIL_HOST_PASSWORD = 'heWDfRfDg@123'
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en//ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['wwww.c0nradsc0rner.com',]
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/Detroit'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -65,7 +67,6 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = '/root/Projects/c0nradsc0rner/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
