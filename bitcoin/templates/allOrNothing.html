@@ -1,0 +1,133 @@
+l{% extends 'base.html' %}
+{% block title %} c0nrad's c0rner {% endblock %}
+
+{% block content %}
+
+<script type="text/javascript">
+  
+  $(document).ready(function() {
+     $('#insufficentFundsError').hide();
+     $('#validBetWarning').hide();
+     $('#invalidAddressError').hide();
+     $('#greatSuccess').hide();
+  });
+  
+  function my_js_callback(data){
+     alert(data.message);
+     alert(data.depositeAddress)
+  }
+  
+  function updateBalance(data) {
+     var newBalance = data.depositeBalance;
+     $("#depositeBalance").html(newBalance);
+  }
+  
+  function playRoundCallback(data) {
+     $('#insufficentFundsError').hide();
+     $('#validBetWarning').hide();
+  
+     var newBalance = data.depositeBalance;
+     $("#depositeBalance").html(newBalance);
+  
+     if (! data.validBet) {
+        $('#validBetWarning').show();
+        return;
+     }
+ 
+     if (! data.sufficentFunds) {
+        $('#insufficentFundsError').show();
+        return;
+     }
+   
+     if (data.isWin) {
+         $("#wasWin").html("Winner!")
+     } else {
+         $("#wasWin").html("Sorry, better luck next time...")
+     }
+  }
+  
+  function withdrawCallback(data) {
+      if (! data.isValidAddress) {
+         $('#invalidAddressError').show();
+         return;
+      }
+
+     var newBalance = data.depositeBalance;
+     $("#depositeBalance").html(newBalance);
+
+     if (data.greatSuccess) {
+        $('#greatSuccess').show()
+     }
+  }
+    
+  var depositeAddress = "{{ depositeAddress }}"
+</script>
+
+<div class="container">
+  <div class="hero-unit">
+    <h2> All Or Nothing! </h2>
+    <p> Welcome to <em> All or Nothing!</em> My first attempt at a bitcoin based application. To play you must currently posses bitcoins. If you are unfamiliar with bitcoins see <a href="http://en.wikipedia.org/wiki/Bitcoin"> Wiki </a>. But essentially it's just online cash with neat mathematical properties. </p>
+    
+    <p> To play: </p>
+    <ol>
+      <li> Send bitcoins to Deposit Address </li>
+      <li> Enter a bet amount and hit <em> Bet! </em> </li>
+      <li> Play as much as you'd like... </li>
+      <li> Withdraw bitcoins back into your own wallet </li>
+      <ol>
+        
+        <hr/>
+        <div class="row-fluid">
+          <div class="span6">
+            
+            <h3> Deposit Address: </h3>
+            <div class="well"> <em> {{ depositeAddress }} </em> </div>
+            <br /> 
+            
+            <h3> Withdraw Address: </h3>
+            <input type="text"  id="withdrawAddress" placeholder="Bitcoin Address"> 
+            <button class="btn" onclick="Dajaxice.bitcoin.withdrawFunds(withdrawCallback, {'depositeAddress' : depositeAddress, 'withdrawAddress' : $('input[id=withdrawAddress]').val()  });"> Withdraw Funds </button>
+
+            <div id="invalidAddressError" class="alert alert-error ">
+              <button type="button" class="close" onclick="$('.alert').hide()" >&times;</button>
+              <strong>Error!</strong> Invalid Address!
+            </div>
+
+            <div id="greatSuccess" class="alert alert-success">
+              <button type="button" class="close" onclick="$('.alert').hide()" >&times;</button>
+              <strong>Success!</strong> Funds transfered successfully!
+            </div>
+
+            
+          </div>
+          <div class="span6" style="border-style:solid; padding:20px"=>
+            <h3> Balance: </h3>
+            <span id=depositeBalance> {{ depositeBalance }} </span> 
+            <button class="btn" onclick="Dajaxice.bitcoin.getBalance(updateBalance, {'depositeAddress' : depositeAddress });" type="button">Refresh Balance</button>
+            
+            
+            <h3> Bet Amount: </h3> 
+            <input type="text" id="betAmount" placeholder="Amount in BTC"> 
+            
+            <button class="btn" type="button" onclick="Dajaxice.bitcoin.playRound(playRoundCallback,{ 'depositeAddress' : depositeAddress, 'betAmount' : $('input[id=betAmount]').val() });"> Bet! </button>
+            
+            
+            <div id="insufficentFundsError" class="alert alert-error ">
+              <button type="button" class="close" onclick="$('.alert').hide()" >&times;</button>
+              <strong>Error!</strong> Insufficent funds!
+            </div>
+            
+            <div id="validBetWarning" class="alert alert-warning ">
+              <button type="button" class="close" onclick="$('.alert').hide()">&times;</button>
+              <strong>Warning!</strong> Not a valid bet!
+            </div>
+            <span class="help-block">Enter the amount of bit coins you'd like to bet this round.</span> </br>
+            
+            <h3> <span id="wasWin"> </span> </h3>
+          </div>
+        </div>
+        
+        
+  </div>
+</div>
+{% endblock %}
