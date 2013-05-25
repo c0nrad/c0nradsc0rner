@@ -1,12 +1,14 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <title>{% block head_title %} c0nrad's c0rner {% endblock %}</title>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+        <script src="{% static "jquery/1.9.1/jquery.min.js" %}"></script>
+        <link href="{% static "bootstrap/2.3.1/css/bootstrap-combined.min.css" %}" rel="stylesheet">
+        <script src="{% static "bootstrap/2.3.1/js/bootstrap.min.js" %}"></script>
+        <script src="{% static "plusone/plusone.js" %}"></script>
 
 	<script type="text/javascript">
 	  

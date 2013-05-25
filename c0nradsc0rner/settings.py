@@ -1,7 +1,15 @@
 # Django settings for c0nradsc0rner project.
 from django.conf import global_settings
+import socket
+import os
 
-DEBUG = True
+if socket.gethostname() == 'c0nradsc0rner.com':
+    DEBUG= False
+    BASE_DIR = "/"
+else:
+    DEBUG = True
+    BASE_DIR = "/root/Projects/c0nradsc0rner/"
+
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -73,9 +81,13 @@ STATIC_ROOT = ''
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
+DAJAX_MEDIA_PREFIX="dajax"
+DAJAX_JS_FRAMEWORK = "jQuery"
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+    '/var/www/static/',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -86,6 +98,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'dajaxice.finders.DajaxiceFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
@@ -96,7 +109,7 @@ SECRET_KEY = 'voxpg!jwy#5$0t_#m_v_s489(n4&amp;*tj4b2%m1!q0ckmu6o^19r'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -122,6 +135,7 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     'blog',
+    'bitcoin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -129,6 +143,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'dajaxice',
+    'dajax',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     
@@ -136,6 +152,7 @@ INSTALLED_APPS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     "django.core.context_processors.csrf",
+    'django.contrib.messages.context_processors.messages',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -146,6 +163,14 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
@@ -156,6 +181,11 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+            'formatter': 'simple'
         }
     },
     'loggers': {
@@ -164,5 +194,10 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'dajaxice': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        }
     }
 }
