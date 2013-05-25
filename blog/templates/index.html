@@ -34,13 +34,22 @@
       {% else %}
       <p>There are no posts.</p>
       {% endif %}
+
+      <div class="pagination"> <center>
+        <ul>
+        {% for x in numberOfPages %}
+        <li> <a href="/page/{{x}}">{{x}}</a> </li>
+        {% endfor %}
+      </ul>
+        </center>
+      </div>
     </div>
 
     <!-- SIDE BAR -->
     <div class="span3">
 
       <div class="hero-unit">
-
+          <h2> Ad </h2>
         <script type="text/javascript"><!--
           google_ad_client = "ca-pub-6591355363097538";
             /* homepage */

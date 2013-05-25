@@ -15,10 +15,12 @@ def categoriesWithPosts():
             categories[str(post.category.title)] = [post]
     return categories
 
-def index(request):
+def index(request, page=0):
+    page = int(page)
     return render_to_response('index.html', {
         'categories': dict(categoriesWithPosts()),
-        'posts': Blog.objects.order_by('-posted')[:5]
+        'posts': Blog.objects.order_by('-posted')[5*page:5*(page+1)],
+        'numberOfPages' : range(Blog.objects.count()//5),
     })
 
 def view_post(request, slug):
